@@ -1,0 +1,38 @@
+package com.learndrools.greeting
+
+
+rule "GreetingGoodMorning"
+    when
+        thePerson : Person()
+        TimeOfDay(hour < 12)
+    then
+        System.out.println("Good Morning, " + thePerson.getName());
+end
+
+rule "GreetingGoodAfternoon"
+    when
+        thePerson : Person()
+        TimeOfDay(hour >= 12, hour <= 17)
+    then
+        System.out.println("Good Afternoon, " + thePerson.getName());
+end
+
+rule "GreetingGoodNight"
+    when
+        thePerson : Person()
+        TimeOfDay(hour >= 23, hour <= 24)
+    then
+        System.out.println("Good Night, " + thePerson.getName());
+end
+
+rule "GreetingGoodEvening"
+    when
+        thePerson : Person()
+        TimeOfDay(hour >= 18, hour <= 22)
+    then
+        System.out.println("Good Evening, " + thePerson.getName());
+end
+
+
+
+
