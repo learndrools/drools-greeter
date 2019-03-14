@@ -69,7 +69,7 @@ public class SpaghettiGreeter {
 	}
 
 	public static void main(String[] args) {
-		Person mauriceMoss = new Person("Maurice Moss", MALE, 32, SINGLE, COLLEGE, NA, false);
+		Person mauriceMoss = new Person("Maurice Moss", MALE, 32, SINGLE, PHD, MD, true);
 		TimeOfDay nineAm = new TimeOfDay(9, 0);
 		SpaghettiGreeter greeter = new SpaghettiGreeter();
 		

@@ -29,9 +29,11 @@ public class GreetingsExample {
             TimeOfDay onePm = new TimeOfDay(13, 0);
             TimeOfDay sevenPm = new TimeOfDay(19, 0);
             TimeOfDay elevenPm = new TimeOfDay(23, 0);
-            Person maurice = new Person("Maurice", Gender.MALE, 32, MaritalStatus.SINGLE, Education.COLLEGE, Degree.NA, false);
+            Person maurice = new Person("Maurice Moss", Gender.MALE, 32, MaritalStatus.SINGLE, Education.MASTERS, Degree.MBA, true);
+            Person jen = new Person("Jen Barber", Gender.FEMALE, 30, MaritalStatus.SINGLE, Education.PHD, Degree.MD, true);
             
             session.insert(maurice);
+            session.insert(jen);
             
             session.insert(onePm);
             session.insert(nineAm);

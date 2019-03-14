@@ -1,38 +1,90 @@
 package com.learndrools.greeting
 
+import com.learndrools.greeting.Person.Gender;
+import com.learndrools.greeting.Person.Education;
+import com.learndrools.greeting.Person.Degree;
+
 
 rule "GreetingGoodMorning"
     when
         thePerson : Person()
         TimeOfDay(hour < 12)
+        not GreetingsAndSalutations(recipient == thePerson)
     then
-        System.out.println("Good Morning, " + thePerson.getName());
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Morning, ");
+        insert(gns);
 end
 
 rule "GreetingGoodAfternoon"
     when
         thePerson : Person()
         TimeOfDay(hour >= 12, hour <= 17)
+        not GreetingsAndSalutations(recipient == thePerson)
     then
-        System.out.println("Good Afternoon, " + thePerson.getName());
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Afternoon, ");
+        insert(gns);
 end
 
 rule "GreetingGoodNight"
     when
         thePerson : Person()
         TimeOfDay(hour >= 23, hour <= 24)
+        not GreetingsAndSalutations(recipient == thePerson)
     then
-        System.out.println("Good Night, " + thePerson.getName());
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Night, ");
+        insert(gns);
 end
 
 rule "GreetingGoodEvening"
     when
         thePerson : Person()
         TimeOfDay(hour >= 18, hour <= 22)
+        not GreetingsAndSalutations(recipient == thePerson)
     then
-        System.out.println("Good Evening, " + thePerson.getName());
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Evening, ");
+        insert(gns);
 end
 
+rule "SalutationKnightedMale"
+	when
+		thePerson : Person(knighted == true, gender == Gender.MALE)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Sir");
+		update(gns);
+end
 
+rule "SalutationKnightedFemale"
+	when
+		thePerson : Person(knighted == true, gender == Gender.FEMALE)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Dame");
+		update(gns);
+end
 
+rule "PrenomialForPHD"
+	when
+		thePerson : Person(knighted == false, education == Education.PHD)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Dr.");
+		update(gns);
+end
+
+rule "PostnomialForDegreeMD"
+	when
+		thePerson : Person(education >= Education.MASTERS, degree == Degree.MD)
+		gns : GreetingsAndSalutations(recipient == thePerson, postnomial == null)
+	then
+	    gns.setPostnomial("M.D.");
+        update(gns);
+end
+
+rule "PrintResults"
+	when
+		gns : GreetingsAndSalutations(greeting != null, prenomial != null)
+	then
+		System.out.println(gns);
+end
 
