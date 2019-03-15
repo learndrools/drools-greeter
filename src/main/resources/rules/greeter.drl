@@ -8,40 +8,40 @@ import com.learndrools.greeting.Person.Degree;
 rule "GreetingGoodMorning"
     when
         thePerson : Person()
-        TimeOfDay(hour < 12)
-        not GreetingsAndSalutations(recipient == thePerson)
+        tod : TimeOfDay(hour < 12)
+        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Morning, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Morning, ");
         insert(gns);
 end
 
 rule "GreetingGoodAfternoon"
     when
         thePerson : Person()
-        TimeOfDay(hour >= 12, hour <= 17)
-        not GreetingsAndSalutations(recipient == thePerson)
+        tod : TimeOfDay(hour >= 12, hour <= 17)
+        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Afternoon, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Afternoon, ");
         insert(gns);
 end
 
 rule "GreetingGoodNight"
     when
         thePerson : Person()
-        TimeOfDay(hour >= 23, hour <= 24)
-        not GreetingsAndSalutations(recipient == thePerson)
+        tod : TimeOfDay(hour >= 23, hour <= 24)
+        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Night, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Night, ");
         insert(gns);
 end
 
 rule "GreetingGoodEvening"
     when
         thePerson : Person()
-        TimeOfDay(hour >= 18, hour <= 22)
-        not GreetingsAndSalutations(recipient == thePerson)
+        tod : TimeOfDay(hour >= 18, hour <= 22)
+        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, "Good Evening, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Evening, ");
         insert(gns);
 end
 
