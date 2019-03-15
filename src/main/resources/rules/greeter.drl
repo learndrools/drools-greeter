@@ -81,10 +81,7 @@ rule "PostnomialForDegreeMD"
         update(gns);
 end
 
-rule "PrintResults"
-	when
-		gns : GreetingsAndSalutations(greeting != null, prenomial != null)
-	then
-		System.out.println(gns);
+query "AllGreetingsAndSalutations"
+	gns : GreetingsAndSalutations()
 end
 

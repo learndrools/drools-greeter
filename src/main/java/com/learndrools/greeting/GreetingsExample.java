@@ -3,6 +3,8 @@ package com.learndrools.greeting;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 
 import com.learndrools.greeting.Person.Degree;
 import com.learndrools.greeting.Person.Education;
@@ -42,6 +44,14 @@ public class GreetingsExample {
                
             // 5 - Fire all rules
             session.fireAllRules();
+            
+            // 6 - Query the Engine
+            QueryResults results = session.getQueryResults("AllGreetingsAndSalutations");
+            
+            for (QueryResultsRow row : results) {
+                GreetingsAndSalutations gns = (GreetingsAndSalutations)row.get("gns");
+                System.out.println(gns);
+            }
         } finally {
             session.dispose();
         }
