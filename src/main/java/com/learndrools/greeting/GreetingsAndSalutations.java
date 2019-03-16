@@ -1,6 +1,11 @@
 package com.learndrools.greeting;
 
 public class GreetingsAndSalutations {
+    public static final String MORNING = "Good Morning, ";
+    public static final String AFTERNOON = "Good Afternoon, ";
+    public static final String EVENING = "Good Evening, ";
+    public static final String NIGHT = "Good Night, ";
+    
     private Person recipient;
     private TimeOfDay tod;
     private String greeting;

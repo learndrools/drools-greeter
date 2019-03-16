@@ -11,7 +11,7 @@ rule "GreetingGoodMorning"
         tod : TimeOfDay(hour < 12)
         not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Morning, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, GreetingsAndSalutations.MORNING);
         insert(gns);
 end
 
@@ -21,17 +21,7 @@ rule "GreetingGoodAfternoon"
         tod : TimeOfDay(hour >= 12, hour <= 17)
         not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Afternoon, ");
-        insert(gns);
-end
-
-rule "GreetingGoodNight"
-    when
-        thePerson : Person()
-        tod : TimeOfDay(hour >= 23, hour <= 24)
-        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
-    then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Night, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, GreetingsAndSalutations.AFTERNOON);
         insert(gns);
 end
 
@@ -41,9 +31,20 @@ rule "GreetingGoodEvening"
         tod : TimeOfDay(hour >= 18, hour <= 22)
         not GreetingsAndSalutations(recipient == thePerson, tod == tod)
     then
-        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, "Good Evening, ");
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, GreetingsAndSalutations.EVENING);
         insert(gns);
 end
+
+rule "GreetingGoodNight"
+    when
+        thePerson : Person()
+        tod : TimeOfDay(hour >= 23, hour <= 24)
+        not GreetingsAndSalutations(recipient == thePerson, tod == tod)
+    then
+        GreetingsAndSalutations gns = new GreetingsAndSalutations(thePerson, tod, GreetingsAndSalutations.NIGHT);
+        insert(gns);
+end
+
 
 rule "SalutationKnightedMale"
 	when
