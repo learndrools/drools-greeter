@@ -73,12 +73,75 @@ rule "PrenomialForPHD"
 		update(gns);
 end
 
+rule "PrenomialForUnder10YearsOld"
+	when
+		thePerson : Person(knighted == false, education != Education.PHD, age <= 10)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Little");
+		update(gns);
+end
+
+rule "DefaultPrenomialForMales"
+	when
+		thePerson : Person(knighted == false, education != Education.PHD, age > 10, gender == Gender.MALE)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Mr.");
+		update(gns);
+end
+
+rule "PrenomialForSingleFemales"
+	when
+		thePerson : Person(knighted == false, education != Education.PHD, age > 10, gender == Gender.FEMALE, maritalStatus == MaritalStatus.SINGLE)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Ms.");
+		update(gns);
+end
+
+rule "PrenomialForMarriedFemales"
+	when
+		thePerson : Person(knighted == false, education != Education.PHD, age > 10, gender == Gender.FEMALE, maritalStatus == MaritalStatus.MARRIED)
+		gns : GreetingsAndSalutations(recipient == thePerson, prenomial == null)
+	then
+		gns.setPrenomial("Mrs.");
+		update(gns);
+end
+
 rule "PostnomialForDegreeMD"
 	when
 		thePerson : Person(education >= Education.MASTERS, degree == Degree.MD)
 		gns : GreetingsAndSalutations(recipient == thePerson, postnomial == null)
 	then
 	    gns.setPostnomial("M.D.");
+        update(gns);
+end
+
+rule "PostnomialForDegreeMA"
+	when
+		thePerson : Person(education >= Education.MASTERS, degree == Degree.MA)
+		gns : GreetingsAndSalutations(recipient == thePerson, postnomial == null)
+	then
+	    gns.setPostnomial("M.A.");
+        update(gns);
+end
+
+rule "PostnomialForDegreeMFA"
+	when
+		thePerson : Person(education >= Education.MASTERS, degree == Degree.MFA)
+		gns : GreetingsAndSalutations(recipient == thePerson, postnomial == null)
+	then
+	    gns.setPostnomial("M.F.A.");
+        update(gns);
+end
+
+rule "PostnomialForDegreeMBA"
+	when
+		thePerson : Person(education >= Education.MASTERS, degree == Degree.MBA)
+		gns : GreetingsAndSalutations(recipient == thePerson, postnomial == null)
+	then
+	    gns.setPostnomial("M.B.A.");
         update(gns);
 end
 
