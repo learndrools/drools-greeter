@@ -1,9 +1,5 @@
 package com.learndrools.greeting.rules;
 
-import static com.learndrools.greeting.Person.Gender.FEMALE;
-import static com.learndrools.greeting.Person.Gender.MALE;
-import static com.learndrools.greeting.Person.MaritalStatus.MARRIED;
-import static com.learndrools.greeting.Person.MaritalStatus.SINGLE;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -41,7 +37,7 @@ public class SalutationsRulesTest extends BaseDroolsTestCase {
     }
 
     @Test
-    public void testSalutationKnightedMale() {
+    public void testSalutationRule() {
         TimeOfDay tod = new TimeOfDay(9, 0);
         Person person = new Person("Some Name", gender, age, maritalStatus, education, degree, knighted);
         
@@ -65,6 +61,7 @@ public class SalutationsRulesTest extends BaseDroolsTestCase {
         }
     }
     
+    @SuppressWarnings("unused")
     private final String testInfo;
     private final int age;
     private final boolean knighted;

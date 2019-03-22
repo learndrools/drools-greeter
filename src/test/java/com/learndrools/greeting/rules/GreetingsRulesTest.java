@@ -34,7 +34,7 @@ public class GreetingsRulesTest extends BaseDroolsTestCase {
     }
     
     @Test
-    public void testGreetingGoodMorning() {
+    public void testGreetingRule() {
         TimeOfDay tod = new TimeOfDay(hourOfTheDay, 0);
         Person richmond = new Person("Richmond Avenal", Gender.MALE, 28, MaritalStatus.SINGLE, Education.COLLEGE, Degree.NA, false);
         
